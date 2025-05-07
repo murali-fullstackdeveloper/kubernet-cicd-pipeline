@@ -50,4 +50,5 @@ jobs:
 
     - name: Deploy with Helm
       run: |
-        helm upgrade --install crud-app ./helm/crud-chart --values ./helm/crud-chart/values.yaml
+        helm upgrade --install crud-app ./helm/fullstack-chart --values ./helm/fullstack-chart/values.yaml
+
