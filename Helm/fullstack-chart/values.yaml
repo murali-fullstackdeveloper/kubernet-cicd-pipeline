@@ -1,0 +1,10 @@
+frontend:
+  image: murali325/crud-frontend:latest
+  port: 3000
+
+backend:
+  image: murali325/crud-backend:latest
+  port: 5000
+
+
+
