@@ -1,0 +1,3 @@
+[submodule "crud-app-frontend"]
+	path = crud-app-frontend
+	url = https://github.com/murali-fullstackdeveloper/crud-app-frontend.git
