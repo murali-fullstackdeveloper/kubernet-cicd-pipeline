@@ -7,7 +7,7 @@ on:
 env:
   REGISTRY: docker.io
   DOCKER_USERNAME: murali325
-  AWS_REGION: us-east-1  # Ensure the correct AWS region
+  AWS_REGION: us-east-1  # Ensure this is the correct AWS region
   EKS_CLUSTER_NAME: crud-app-cluster  # Your EKS cluster name
 
 jobs:
@@ -18,18 +18,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up AWS CLI (with update)
+    - name: Set up AWS CLI
       run: |
-        # Check if AWS CLI is installed, and install if necessary
         if ! command -v aws &> /dev/null; then
           echo "AWS CLI not found. Installing..."
           curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
           unzip awscliv2.zip
           sudo ./aws/install
         else
-          echo "AWS CLI found. Updating..."
-          sudo /usr/local/aws-cli/v2/current/bin/aws --version
-          sudo /usr/local/aws-cli/v2/current/bin/aws --update
+          echo "AWS CLI found."
         fi
 
     - name: Configure AWS Credentials
@@ -67,7 +64,6 @@ jobs:
 
     - name: Update kubeconfig for EKS
       run: |
-        # Update kubeconfig to use the EKS cluster
         aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }}
 
     - name: Test cluster connection
