@@ -33,7 +33,7 @@ jobs:
 
     - name: Build and Push Backend Image
       run: |
-        docker build -t $REGISTRY/$DOCKER_USERNAME/crud-backend:latest ./backend-node.js
+        docker build -t $REGISTRY/$DOCKER_USERNAME/crud-backend:latest ./backend-node
 
         docker push $REGISTRY/$DOCKER_USERNAME/crud-backend:latest
 
