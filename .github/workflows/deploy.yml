@@ -27,13 +27,13 @@ jobs:
 
     - name: Build and Push Frontend Image
       run: |
-        docker build -t $REGISTRY/$DOCKER_USERNAME/crud-frontend:latest ./crud-app-frontend
+        docker build -t $REGISTRY/$DOCKER_USERNAME/crud-frontend:latest ./React-frontend
 
         docker push $REGISTRY/$DOCKER_USERNAME/crud-frontend:latest
 
     - name: Build and Push Backend Image
       run: |
-        docker build -t $REGISTRY/$DOCKER_USERNAME/crud-backend:latest ./crud-app-backend
+        docker build -t $REGISTRY/$DOCKER_USERNAME/crud-backend:latest ./backend-node.js
 
         docker push $REGISTRY/$DOCKER_USERNAME/crud-backend:latest
 
