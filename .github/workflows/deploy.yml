@@ -63,9 +63,11 @@ jobs:
       uses: azure/setup-helm@v3
 
     - name: Update kubeconfig for EKS
-      run: |
-        aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }}
-        cat ~/.kube/config  # Check if kubeconfig is correctly updated
+     run: |
+    aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }}
+    export KUBECONFIG=$HOME/.kube/config
+    kubectl get nodes
+
 
     - name: Test cluster connection
       env:
