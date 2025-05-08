@@ -28,13 +28,11 @@ jobs:
     - name: Build and Push Frontend Image
       run: |
         docker build -t $REGISTRY/$DOCKER_USERNAME/crud-frontend:latest ./React-frontend
-
         docker push $REGISTRY/$DOCKER_USERNAME/crud-frontend:latest
 
     - name: Build and Push Backend Image
       run: |
-        docker build -t $REGISTRY/$DOCKER_USERNAME/crud-backend:latest ./backend-node
-
+        docker build -t $REGISTRY/$DOCKER_USERNAME/crud-backend:latest ./backend-node.js
         docker push $REGISTRY/$DOCKER_USERNAME/crud-backend:latest
 
     - name: Set up kubectl
@@ -52,5 +50,4 @@ jobs:
 
     - name: Deploy with Helm
       run: |
-        helm upgrade --install crud-app ./helm/fullstack-chart --values ./helm/fullstack-chart/values.yaml
-
+        helm upgrade --install crud-app ./Helm/fullstack-chart --values ./Helm/fullstack-chart/values.yaml
