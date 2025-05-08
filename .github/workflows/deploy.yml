@@ -27,12 +27,12 @@ jobs:
 
     - name: Build and Push Frontend Image
       run: |
-        docker build -t $REGISTRY/$DOCKER_USERNAME/crud-frontend:latest ./React-frontend
+        docker build -t $REGISTRY/$DOCKER_USERNAME/crud-frontend:latest ./frontend
         docker push $REGISTRY/$DOCKER_USERNAME/crud-frontend:latest
 
     - name: Build and Push Backend Image
       run: |
-        docker build -t $REGISTRY/$DOCKER_USERNAME/crud-backend:latest ./backend-node.js
+        docker build -t $REGISTRY/$DOCKER_USERNAME/crud-backend:latest ./backend
         docker push $REGISTRY/$DOCKER_USERNAME/crud-backend:latest
 
     - name: Set up kubectl
