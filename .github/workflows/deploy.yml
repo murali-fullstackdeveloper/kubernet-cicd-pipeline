@@ -17,11 +17,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up AWS CLI
+    - name: Set up AWS CLI (with update)
       run: |
-        curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-        unzip awscliv2.zip
-        sudo ./aws/install
+        if ! command -v aws &> /dev/null; then
+          echo "AWS CLI not found. Installing..."
+          curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
+        else
+          echo "AWS CLI found. Updating..."
+          sudo /usr/local/aws-cli/v2/current/bin/aws --version
+          sudo /usr/local/aws-cli/v2/current/bin/aws --update
+        fi
 
     - name: Set up Docker
       uses: docker/setup-buildx-action@v2
