@@ -65,14 +65,15 @@ jobs:
     - name: Update kubeconfig for EKS
       run: |
         aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }}
+      # Ensure KUBECONFIG environment variable is set correctly
 
     - name: Test cluster connection
       env:
-        KUBECONFIG: kubeconfig
+        KUBECONFIG: ~/.kube/config  # Ensure the kubeconfig path is correct
       run: kubectl get nodes
 
     - name: Deploy with Helm
       env:
-        KUBECONFIG: kubeconfig
+        KUBECONFIG: ~/.kube/config  # Ensure the kubeconfig path is correct
       run: |
         helm upgrade --install crud-app ./Helm/fullstack-chart --values ./Helm/fullstack-chart/values.yaml
