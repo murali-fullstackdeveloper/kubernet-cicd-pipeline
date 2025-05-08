@@ -44,10 +44,15 @@ jobs:
       uses: azure/setup-helm@v3
 
     - name: Configure kubeconfig
-      run: |
-        echo "${{ secrets.KUBECONFIG }}" > kubeconfig
-        export KUBECONFIG=kubeconfig
+      run: echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+
+    - name: Test cluster connection
+      env:
+        KUBECONFIG: kubeconfig
+      run: kubectl get nodes
 
     - name: Deploy with Helm
+      env:
+        KUBECONFIG: kubeconfig
       run: |
         helm upgrade --install crud-app ./Helm/fullstack-chart --values ./Helm/fullstack-chart/values.yaml
